@@ -15,6 +15,7 @@ import java.util.Set;
 @RestController
 @Slf4j
 @RequestMapping("/onlineUsers")
+@CrossOrigin(origins = "https://charming-begonia-03bcfb.netlify.app", allowCredentials="true")
 public class OnlineUsersController {
 
     @Autowired

@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@CrossOrigin(origins = "https://charming-begonia-03bcfb.netlify.app", allowCredentials="true")
 public class ChatController {
 
     @Autowired
