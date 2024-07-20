@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5001"})
 @Slf4j
 @RequestMapping("/onlineUsers")
 public class OnlineUsersController {

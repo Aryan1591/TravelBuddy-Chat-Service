@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5001"})
 @Slf4j
 public class ChatController {
 
