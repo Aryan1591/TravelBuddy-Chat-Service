@@ -14,7 +14,6 @@ import java.util.Set;
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "*")
 @RequestMapping("/onlineUsers")
 public class OnlineUsersController {
 
