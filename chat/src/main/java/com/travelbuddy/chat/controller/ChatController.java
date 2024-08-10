@@ -17,11 +17,12 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = "https://astonishing-kitsune-6007fe.netlify.app", allowCredentials = "true")
+@CrossOrigin(origins = {"https://astonishing-kitsune-6007fe.netlify.app", "http://localhost:8080"}, allowCredentials = "true")
 @Slf4j
 public class ChatController {
 
@@ -66,12 +67,14 @@ public class ChatController {
         return chatRoomService.getAllMessagesForAChatRoom(roomId);
     }
 
-    @PostMapping("/createRoom")
-    public ChatRoom buildChatRoom() {
+    @PostMapping("/createRoom/{postId}")
+    public String buildChatRoom(@PathVariable String postId) {
         ChatRoom chatRoom = ChatRoom.builder()
-                .roomId("e6542efc-88ce-4a3f-a2e5-75eebe9b4e22")
+                .roomId(postId)
+                .messageList(new ArrayList<>())
                 .build();
-        return mongoService.saveRoom(chatRoom);
+        mongoService.saveRoom(chatRoom);
+        return "Room has been successfully created with chatId " + postId;
     }
 
     @MessageMapping("/chat/join")
