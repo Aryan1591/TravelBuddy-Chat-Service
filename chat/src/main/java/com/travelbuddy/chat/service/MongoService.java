@@ -10,7 +10,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class MongoService {
@@ -36,7 +39,6 @@ public class MongoService {
     }
 
     public ChatRoom saveRoom(ChatRoom room) {
-        room.setMessageList(new ArrayList<>());
         return mongoTemplate.insert(room);
     }
 
