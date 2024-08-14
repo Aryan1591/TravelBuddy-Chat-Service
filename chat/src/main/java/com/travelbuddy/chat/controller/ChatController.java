@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = {"https://astonishing-kitsune-6007fe.netlify.app", "http://localhost:8080", "http://localhost:5173"}, allowCredentials = "true")
+@CrossOrigin(origins = {"https://coruscating-gaufre-9c3549.netlify.app", "http://localhost:8080", "http://localhost:5173"}, allowCredentials = "true")
 @Slf4j
 public class ChatController {
 
