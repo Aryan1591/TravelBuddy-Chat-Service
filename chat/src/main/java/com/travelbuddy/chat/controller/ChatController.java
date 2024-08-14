@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = {"https://astonishing-kitsune-6007fe.netlify.app", "http://localhost:8080"}, allowCredentials = "true")
+@CrossOrigin(origins = {"https://astonishing-kitsune-6007fe.netlify.app", "http://localhost:8080", "http://localhost:5173"}, allowCredentials = "true")
 @Slf4j
 public class ChatController {
 
@@ -38,14 +38,10 @@ public class ChatController {
         this.messagingTemplate = simpMessagingTemplate;
     }
 
-    @PostMapping("/check")
-    public Message message() {
-        Message message = Message.builder()
-                .content("Hello")
-                .timestamp(LocalDate.now())
-                .username("Aryan")
-                .build();
-        return mongoService.insertMessage(message, "e6542efc-88ce-4a3f-a2e5-75eebe9b4e22");
+    @PostMapping("/check/{roomId}")
+    public ChatRoom message(@PathVariable String roomId) {
+
+        return mongoService.saveRoom(ChatRoom.builder().roomId(roomId).messageList(List.of(new Message("hello", LocalDate.now(), "avishekh"))).build());
     }
 
     @MessageMapping("/chat/{roomId}")
@@ -92,5 +88,15 @@ public class ChatController {
     private void sendActiveUsers(String roomId) {
         Set<String> activeUsers = activeUserService.getActiveUsers(roomId);
         messagingTemplate.convertAndSend("/topic/" + roomId + "/active-users", activeUsers);
+    }
+
+    @DeleteMapping("/chat/{id}")
+    public String deleteChatRecord(@PathVariable String id) {
+        try {
+            mongoService.deleteChatRecord(id);
+            return String.format("Record with id %s has been successfully deleted ", id);
+        } catch (Exception e) {
+            return String.format("Record with id %s has not been deleted for reason %s", id, e.getMessage());
+        }
     }
 }
